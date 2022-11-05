@@ -7,6 +7,10 @@ class Artiste(models.Model):
     age = models.IntegerField()
 
 
+    def __str__(self):
+        return f"{self.first_name}"
+
+
 class Song(models.Model):
     title = models.CharField(max_length=200)
     date_released = models.DateTimeField()
@@ -14,7 +18,15 @@ class Song(models.Model):
     artiste = models.ForeignKey(Artiste, on_delete=models.CASCADE) 
 
 
+    def __str__(self):
+        return f"{self.title} - {self.artiste}"
+
+
 
 class Lyric(models.Model):
     content = models.TextField()
-    song = models.ForeignKey(Song, on_delete=models.SET_NULL)
+    song = models.ForeignKey(Song, on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return "Lyric"
